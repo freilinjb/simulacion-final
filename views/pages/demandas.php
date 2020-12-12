@@ -27,15 +27,19 @@
                             Datos generales
                         </h3>
                     </div>
-                    <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                        <div class="card-body">
                         <table id="empleados" class="table table-bordered table-striped table-hover">
                             <thead style="background-color:#6F747E; color:#FFFF">
                                 <tr>
+                                    <th colspan="6"><H1 class="text-center">TIEMPO ENTRE LLEGADA POR DEMANDA</H1></th>
+                                </tr>
+                                <tr>
                                     <th>#</th>
                                     <th>Producto</th>
-                                    <th>tanda</th>
                                     <th>probabilidad</th>
-                                    <th>llegadas</th>
                                     <th>llegadas</th>
                                     <th>tanda</th>
                                     <th>Accion</th>
@@ -51,32 +55,26 @@
                                     $color = null;
                                     if ($value["tanda"] == "MINIMA") {
                                         $tanda = "<span class='badge badge-warning'>" . $value["tanda"] . "</span>";
-                                        $color = 'warning';
                                         
                                     } elseif ($value["tanda"] == "PROMEDIO") {                                    
                                         $tanda = "<span class='badge badge-success'>" . $value["tanda"] . "</span>";
-                                        $color = 'success';
 
                                     } elseif ($value["tanda"] == "ALTA") {
-                                        $color = 'warning';
                                         $tanda = "<span class='badge badge-warning'>" . $value["tanda"] . "</span>";
                                     
                                     } else {
-                                        $color = 'danger';
                                         $tanda = "<span class='badge badge-danger'>" . $value["tanda"] . "</span>";
                                     }
 
                                     echo '<tr>
-                                    <td><strong>' . ($key + 1) . '</strong></td>
+                                    <td><strong>' . $value["idProducto"] . '</strong></td>
                                     <td><strong>' . strtoupper($value["producto"]) . '</strong></td>
-                                    <td><strong>' . strtoupper($value["tanda"]) . '</strong></td>
                                     <td>
                                         <div class="progress progress-xs">
                                             <div class="progress-bar progress-bar-danger" style="width: '.$value["probabilidad"] .'%"></div>
                                         </div>
                                     </td>
                                     <td><strong>' . $value["probabilidad"] . '%</strong></td>
-                                    <td><strong>' . $value["llegadas"] . '</strong></td>
                                     <td><strong>' . $tanda . '</strong></td>
                                     <td>
                                         <div class="btn-group" role="group">
@@ -90,6 +88,103 @@
                             </tbody>
                         </table>
                     </div>
+                        </div>
+                        <div class="col-6">
+                        <div class="card-body">
+                        <table id="faseTiempo" class="table table-bordered table-striped table-hover">
+                            <thead style="background-color:#6F747E; color:#FFFF">
+                                <tr>
+                                    <th colspan="6"><H1 class="text-center">TIEMPO DE SERVICIO POR FASE</H1></th>
+                                </tr>
+                                <!-- <tr>
+                                    <th>#</th>
+                                    <th>Producto</th>
+                                    <th>probabilidad</th>
+                                    <th>llegadas</th>
+                                    <th>tanda</th>
+                                    <th>Accion</th>
+                                </tr> -->
+                            
+                            
+                                <?php
+
+                                $eventos = SimulacionController::getData('tandaTiempoServicio_v', null, null);
+                                
+                                $fases = array();
+                                $tandas = array();
+
+                                foreach($eventos as $key) {
+                                    array_push($fases,$key["fase"]);
+                                    array_push($tandas,$key["tanda"]);
+                                }
+
+                                foreach($eventos as $key) {
+                                    array_push($fases,$key["fase"]);
+                                    array_push($tandas,$key["tanda"]);
+                                }
+
+                                $fases = array_unique($fases);
+                                $tandas = array_unique($tandas);
+
+                                $tabla = '<tr>
+                                            <th>#</th><th>Fase</th>';
+                                foreach($tandas as $key) {
+                                    $tabla .= "<th>$key</th>";
+                                }
+                                $tabla .='<th>probabilidad</th><th>llegada</th>
+                                    </tr></thead><tbody>';
+
+                                echo $tabla;
+                                
+                               
+
+                                // print_r($fases);
+                                // print_r($tandas);
+
+                                foreach ($eventos as $key => $value) {
+
+                                    $tanda = null;
+                                    $color = null;
+                                    if ($value["tanda"] == "MINIMA") {
+                                        $tanda = "<span class='badge badge-warning'>" . $value["tanda"] . "</span>";
+                                        
+                                    } elseif ($value["tanda"] == "PROMEDIO") {                                    
+                                        $tanda = "<span class='badge badge-success'>" . $value["tanda"] . "</span>";
+
+                                    } elseif ($value["tanda"] == "ALTA") {
+                                        $tanda = "<span class='badge badge-warning'>" . $value["tanda"] . "</span>";
+                                    
+                                    } else {
+                                        $tanda = "<span class='badge badge-danger'>" . $value["tanda"] . "</span>";
+                                    }
+
+                                    echo '<tr>
+                                    <td><strong>' . ($key+1) . '</strong></td>
+                                    <td><strong>' . strtoupper($value["fase"]) . '</strong></td>
+                                    <td>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" style="width: '.$value["probabilidad"] .'%"></div>
+                                        </div>
+                                    </td>
+                                    <td><strong>' . $value["probabilidad"] . '%</strong></td>
+                                    <td><strong>' . $tanda . '</strong></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary btnEditarProducto" data-toggle="modal" data-target="#modalEditarProducto" idProducto="' . $value["idFase"] . '"><i class="fas fa-eye"></i></button>
+                                            <button type="button" class="btn btn-dark btnEliminarProducto" data-target="#editarProducto" idProducto="' . $value["idFase"] . '"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                    </tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                        </div>
+                    </div>
+                    
+
+                    
                 </div>
                 <!-- /.card -->
             </div>
@@ -208,8 +303,16 @@
             "info": true,
             "paging": true,
             "pageLength": 7,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
         }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(0)');
+
+        $("#faseTiempo").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "info": true,
+            "paging": true,
+            "pageLength": 7,
+        }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
     });
 
     //Initialize Select2 Elements
