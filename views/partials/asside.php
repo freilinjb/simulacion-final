@@ -56,21 +56,21 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tree"></i>
                                 <p>
-                                    Admin Compras
+                                    Simulacion digital
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../UI/general.html" class="nav-link">
+                                    <a href="analisis" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>General</p>
+                                        <p>Analisis</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../UI/icons.html" class="nav-link">
+                                    <a href="conclusion" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Icons</p>
+                                        <p>Conclusion</p>
                                     </a>
                                 </li>
                             </ul>

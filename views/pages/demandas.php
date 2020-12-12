@@ -96,51 +96,19 @@
                                 <tr>
                                     <th colspan="6"><H1 class="text-center">TIEMPO DE SERVICIO POR FASE</H1></th>
                                 </tr>
-                                <!-- <tr>
+                                <tr>
                                     <th>#</th>
                                     <th>Producto</th>
                                     <th>probabilidad</th>
                                     <th>llegadas</th>
                                     <th>tanda</th>
                                     <th>Accion</th>
-                                </tr> -->
-                            
-                            
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
 
                                 $eventos = SimulacionController::getData('tandaTiempoServicio_v', null, null);
-                                
-                                $fases = array();
-                                $tandas = array();
-
-                                foreach($eventos as $key) {
-                                    array_push($fases,$key["fase"]);
-                                    array_push($tandas,$key["tanda"]);
-                                }
-
-                                foreach($eventos as $key) {
-                                    array_push($fases,$key["fase"]);
-                                    array_push($tandas,$key["tanda"]);
-                                }
-
-                                $fases = array_unique($fases);
-                                $tandas = array_unique($tandas);
-
-                                $tabla = '<tr>
-                                            <th>#</th><th>Fase</th>';
-                                foreach($tandas as $key) {
-                                    $tabla .= "<th>$key</th>";
-                                }
-                                $tabla .='<th>probabilidad</th><th>llegada</th>
-                                    </tr></thead><tbody>';
-
-                                echo $tabla;
-                                
-                               
-
-                                // print_r($fases);
-                                // print_r($tandas);
-
                                 foreach ($eventos as $key => $value) {
 
                                     $tanda = null;
@@ -166,7 +134,7 @@
                                             <div class="progress-bar progress-bar-danger" style="width: '.$value["probabilidad"] .'%"></div>
                                         </div>
                                     </td>
-                                    <td><strong>' . $value["probabilidad"] . '%</strong></td>
+                                    <td><strong>' . $value["llegada"] . '</strong></td>
                                     <td><strong>' . $tanda . '</strong></td>
                                     <td>
                                         <div class="btn-group" role="group">
