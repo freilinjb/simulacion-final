@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Numero de ordenes entrantes</label>
-                                <input type="number" class="form-control" name="numOrdenes" id="numOrdenes" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="100">
+                                <input type="number" class="form-control" name="numOrdenes" id="numOrdenes" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="30">
                             </div>
                             <div class="form-group">
                                 <label>Promedio de duración de las ordenes (horas)</label>
@@ -75,10 +75,10 @@
                                 <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Informacion a procesar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false">Messages</a>
+                                <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false">Procesamiento</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill" href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings" aria-selected="false">Settings</a>
+                                <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill" href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings" aria-selected="false">Conclusion</a>
                             </li>
                         </ul>
                         <div class="tab-custom-content">
@@ -122,7 +122,18 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
-                                Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                            <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-bordered table-striped table-hover" id="tablaProcesadaProducto">
+
+                                        </table>
+                                    </div>
+                                    <div class="col-12">
+                                        <table class="table table-bordered table-striped table-hover" id="tablaProcesadaEventos">
+
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
                                 Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.

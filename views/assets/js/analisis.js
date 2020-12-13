@@ -177,8 +177,11 @@ $(function () {
     }
 
     console.log("DatosGenerales: ",datosGenerales);
-    console.log("eventosEncontrados: ",eventosEncontrados);
+    // console.log("eventosEncontrados: ",eventosEncontrados);
     console.log("productoSeleccionado: ",productoSeleccionado);
+
+    generarTablaProcesamientoEventos(eventosEncontrados);
+    generarTablaProcesamientoProductos(productoSeleccionado);
 
   }
 
@@ -461,6 +464,74 @@ $(function () {
 
     $("#tablaEventos").empty();
     $("#tablaEventos").html(html);
+    // console.log(html);
+  }
+
+  function generarTablaProcesamientoEventos(arreglo) {
+    let html = `
+              <thead style="background-color:#6F747E; color:#FFFF">
+                <tr>
+                  <th colspan="5"><h3 class="text-center">INFORMACION FINAL DE LOS EVENTOS REGISTRADOS Y SUS CORRECCIONES</h3></th>
+                </tr>
+
+                <tr>
+                  <th>numOrden</th>
+                  <th>Fase</th>
+                  <th>fecha</th>
+                  <th>Inc. servicio</th>
+                  <th>Accion Correctiva</th>
+                <tr> 
+              </thead>`;
+
+    arreglo.forEach((key, index) => {
+      const fecha = new Date(key["fecha"]);
+      html += `
+                <tr>
+                  <td><strong>${key["numOrden"]}</strong></td>
+                  <td><strong>${key["fase"].toLocaleString()}</strong></td>
+                  <td><strong>${fecha}</strong></td>
+                  <td><strong>${key["t_servicio"]}%</strong></td>
+                  <td><strong>${key["accionCorrectiva"]}</strong></td>
+                </tr>
+               `;
+    });
+
+    $("#tablaProcesadaEventos").empty();
+    $("#tablaProcesadaEventos").html(html);
+    // console.log(html);
+  }
+
+  function generarTablaProcesamientoProductos(arreglo) {
+    let html = `
+              <thead style="background-color:#6F747E; color:#FFFF">
+                <tr>
+                  <th colspan="5"><h3 class="text-center">INFORMES DE LOS PRODUCTOS SELECCIONADOS DE LA SIMULACION</h3></th>
+                </tr>
+
+                <tr>
+                  <th>#</th>
+                  <th>producto</th>
+                  <th>tanda</th>
+                  <th>Fecha</th>
+                  <th>Probabilidad</th>
+                <tr> 
+              </thead>`;
+
+    arreglo.forEach((key, index) => {
+      const fecha = new Date(key["fecha"]);
+      html += `
+                <tr>
+                  <td><strong>${index+1}</strong></td>
+                  <td><strong>${key["producto"]}</strong></td>
+                  <td><strong>${key["tanda"]}</strong></td>
+                  <td><strong>${fecha}</strong></td>
+                  <td><strong>${key["probabilidad"]}%</strong></td>
+                </tr>
+               `;
+    });
+
+    $("#tablaProcesadaProducto").empty();
+    $("#tablaProcesadaProducto").html(html);
     // console.log(html);
   }
   function crearGrafico(clase, data) {
