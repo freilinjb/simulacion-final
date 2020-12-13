@@ -30,6 +30,8 @@ class UsuariosAjax {
         
         echo json_encode($respuesta);
     }
+
+    
 }
 
 /*=============================================

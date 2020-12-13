@@ -1,3 +1,6 @@
+<?php 
+    print_r($_GET);
+?>
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -97,9 +100,9 @@
                                 </tr>
                                 <tr>
                                     <th>#</th>
-                                    <th>Producto</th>
+                                    <th>Fase</th>
                                     <th>probabilidad</th>
-                                    <th>llegadas</th>
+                                    <th>tiempo (min)</th>
                                     <th>tanda</th>
                                     <th>Accion</th>
                                 </tr>
@@ -149,9 +152,6 @@
                     </div>
                         </div>
                     </div>
-                    
-
-                    
                 </div>
                 <!-- /.card -->
             </div>

@@ -6,6 +6,7 @@ require_once "../Models/SimulacionModel.php";
 class SimulacionAjax {
     public $idEvento;
     public $idProducto;
+    public $idTanda;
 
     public function registrarEvento()
     {
@@ -49,6 +50,26 @@ class SimulacionAjax {
 
         echo json_encode($respuesta);
     }
+
+    public function getTiempoServicio()
+    {
+
+        $item = "idTanda";
+        $valor = $this->idTanda;
+
+        $respusta = SimulacionModel::getData("tiempoServicio_v",$item, $valor);
+        echo json_encode($respusta);
+    }
+
+    public function getTandaTiempoServicio()
+    {
+
+        $item = "idTanda";
+        $valor = $this->idTanda;
+        $respusta = SimulacionModel::getData("tandatiemposervicio_v",$item, $valor);
+        // print_r($respusta);die;
+        echo json_encode($respusta);
+    }
 }
 
 /*=============================================
@@ -74,6 +95,16 @@ if(isset($_POST['exec']) && !empty($_POST['exec'])) {
         case 'eliminarProducto':
             $ejecutar->idEvento = $_POST["idProducto"];
             $ejecutar -> eliminarProducto();
+            break;
+        
+        case 'getTandaTiempoServicio':
+            $ejecutar->idTanda = $_POST["idTanda"];
+            $ejecutar -> getTandaTiempoServicio();
+            break;
+
+        case 'getTiempoServicio':
+            $ejecutar->idTanda = $_POST["idTanda"];
+            $ejecutar -> getTiempoServicio();
             break;
     }
 }

@@ -16,7 +16,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="home" class="nav-link">
+                            <a href="homes" <?php if($_GET['route']=="homes") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -33,19 +33,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="demandas" class="nav-link">
+                                    <a href="demandas" <?php if($_GET['route']=="demandas") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Registro de demanda</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="productos" class="nav-link">
+                                    <a href="productos" <?php if($_GET['route']=="productos") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Administrador de producto</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="eventos" class="nav-link">
+                                <a href="eventos" <?php if($_GET['route']=="eventos") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Administrador de eventos</p>
                                     </a>
@@ -62,13 +62,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="analisis" class="nav-link">
+                                <a href="analisis" <?php if($_GET['route']=="analisis") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Analisis</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="conclusion" class="nav-link">
+                                    <a href="conclusion" <?php if($_GET['route']=="conclusion") { ?> class="nav-link active" <?php }  else{ ?> class="nav-link" <?php } ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Conclusion</p>
                                     </a>
@@ -94,81 +94,6 @@
                                     <a href="../UI/icons.html" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Icons</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Desarrollo de producto
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="administracionProducto" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Administración de producto</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    Produccion
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Asignar Planta</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/advanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Asignar Modulo</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    RR. HH
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="employee" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Admin. Empleados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/advanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Asignar Modulo</p>
                                     </a>
                                 </li>
                             </ul>

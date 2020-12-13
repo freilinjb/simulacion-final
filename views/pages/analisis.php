@@ -27,26 +27,33 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <select class="form-control select2bs4" name="idEstado" id="idEstado">
-                                <option value="" disabled selected>Seleccione una opción</option>
-                                <?php
-                                $sexo =  SimulacionController::getData('tanda', null, null);
-                                foreach ($sexo as $index => $valor) {
-                                    echo "<option value=" . $valor["idTanda"] . ">" . $valor["tanda"] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Numero de ordenes entrantes</label>
-                            <input type="numeric" class="form-control" name="numOrdenes" id="numOrdenes" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <label for="customRange1">Custom range</label>
-                            <input type="range" class="custom-range" id="customRange1">
-                        </div>
+                        <form id="formProcesar">
+                            <div class="form-group">
+                                <label>Tanda</label>
+                                <select class="form-control select2bs4" name="tanda" id="tanda">
+                                    <!-- <option value="" disabled selected>Seleccione una tanda</option> -->
+                                    <?php
+                                    $sexo =  SimulacionController::getData('tanda', null, null);
+                                    foreach ($sexo as $index => $valor) {
+                                        echo "<option value=" . $valor["idTanda"] . ">" . $valor["tanda"] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Numero de ordenes entrantes</label>
+                                <input type="number" class="form-control" name="numOrdenes" id="numOrdenes" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Promedio de duración de las ordenes (horas)</label>
+                                <input type="number" class="form-control" name="numPromedioDuracion" id="numPromedioDuracion" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="5">
+                            </div>
+                            <div class="form-group">
+                                <label>Tiempo objetivo de respuesta (horas)</label>
+                                <input type="number" class="form-control" name="tiempoObjetivo" id="tiempoObjetivo" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="3">
+                            </div>
+                            <button type="submit" class="btn btn-primary float-right" id="btnProcesar">Procesar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -61,7 +68,7 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Home</a>
+                                <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Fases</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Profile</a>
@@ -78,7 +85,27 @@
                         </div>
                         <div class="tab-content" id="custom-content-above-tabContent">
                             <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget sapien porta consectetur.
+                                <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-6">
+                                        <!-- GRAFICO -->
+                                        <h4>Fases del sistema de produccion</h4>
+                                        <div id="donut-chart" style="height: 300px;"></div>
+                                        <hr>
+                                        <p>Tiempo del servicio: <span id="faseTiempo"></span></p>
+                                        <!-- GRAFICO -->
+                                    </div>
+                                    <div class="col-6">
+                                        <!-- GRAFICO -->
+                                        <h4>Productos del sistema</h4>
+                                        <div id="donut" style="height: 300px;"></div>
+                                        <hr>
+                                        <p>Tiempo del servicio: <span id="faseTiempo"></span></p>
+                                        <!-- GRAFICO -->
+                                </div>
+                                </div>
+                            </div>
+
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
                                 Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
@@ -102,7 +129,7 @@
 
 
 <!-- SCRIPT PERSONAL -->
-<script src="views/assets/js/productos.js"></script>
+<script src="views/assets/js/analisis.js"></script>
 <!-- DataTables  & Plugins -->
 
 <link rel="stylesheet" href="views/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -137,29 +164,39 @@
 <!-- Select2 -->
 <script src="views/assets/plugins/select2/js/select2.full.min.js"></script>
 <!-- Page specific script -->
+
+
+<!-- FLOT CHARTS -->
+<script src="views/assets/plugins/flot/jquery.flot.js"></script>
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="views/assets/plugins/flot/plugins/jquery.flot.resize.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="views/assets/plugins/flot/plugins/jquery.flot.pie.js"></script>
+
 <script>
     $(function() {
-        $("#empleados").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "info": true,
-            "paging": true,
-            "pageLength": 7,
-        }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(0)');
+                //     $("#empleados").DataTable({
+                //         "responsive": true,
+                //         "lengthChange": false,
+                //         "autoWidth": false,
+                //         "info": true,
+                //         "paging": true,
+                //         "pageLength": 7,
+                //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(0)');
 
-        $("#faseTiempo").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "info": true,
-            "paging": true,
-            "pageLength": 7,
-        }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
-    });
+                //     $("#faseTiempo").DataTable({
+                //         "responsive": true,
+                //         "lengthChange": false,
+                //         "autoWidth": false,
+                //         "info": true,
+                //         "paging": true,
+                //         "pageLength": 7,
+                //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    });
+                //Initialize Select2 Elements
+                $('.select2bs4').select2({
+                    theme: 'bootstrap4'
+                });
+            });
+
 </script>
