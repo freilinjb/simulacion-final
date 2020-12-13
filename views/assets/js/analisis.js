@@ -6,20 +6,180 @@ $(function () {
   let fasesGrafico = [];
   let productosGrafico = [];
   let probabilidadSum = 0;
+  let tiempoTotalServicio = 0;
 
+  let datosGenerales = [];
+  let eventosEncontrados = [];
+  let productoSeleccionado = [];
+
+  let fecha = new Date();
   /**
    * SIMULACION
    */
+
+  var numero = 1;
+  function Factorial(num) {
+    var numero = 1;
+    for (var sw = 1; sw <= num; sw += 1) {
+      numero *= sw;
+    }
+    return numero;
+  }
+
+  function NumComb(sup, inf) {
+    return Factorial(sup) / (Factorial(inf) * Factorial(sup - inf));
+  }
+
+  function Binomial(n, p, k) {
+    // miForm = document.forms[0];
+    n = parseInt(n);
+    k = parseInt(k);
+    // miForm.pruebas.value = n;
+    // miForm.exitos.value = k;
+    var vResp;
+
+    if (n > 0 && p >= 0 && p <= 1 && k >= 0 && k <= n) {
+      vResp = NumComb(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+      if (isNaN(vResp) == true) {
+        vResp = " � E R R O R ! ";
+      }
+    } else {
+      vResp = " � E R R O R ! ";
+    }
+
+    return vResp;
+  }
+  //--------------------------------------------
+  function BinomialAcu(n, p, k) {
+    // miForm = document.forms[1];
+    n = parseInt(n);
+    k = parseInt(k);
+    // miForm.pruebas.value = n;
+    // miForm.exitos.value = k;
+    var vResp = 0;
+    var i = 0;
+
+    if (n > 0 && p >= 0 && p <= 1 && k >= 0 && k <= n) {
+      while (i <= k) {
+        vResp += NumComb(n, i) * Math.pow(p, i) * Math.pow(1 - p, n - i);
+        i++;
+      }
+      if (isNaN(vResp) == true) {
+        vResp = " � E R R O R ! ";
+      }
+      // miForm.respuesta.value = vResp;
+    } else {
+      vResp = " � E R R O R ! ";
+      // miForm.respuesta.value = vResp;
+    }
+  }
+
+  function exponencial(u) {
+    const aleatorio = Math.random();
+    return -u * Math.LN10;
+  }
+
+  /**
+   * Distribucion Poisson canal unico
+   * @param {float} lambda
+   */
+
+  function distroPoisson(lambda) {
+    const aleatorio = Math.random();
+    return (-1 / lambda) * Math.LN2(aleatorio);
+  }
 
   $("#btnProcesar").click(function () {
     simulacion();
   });
 
+  let lambda = 0;
+  let mew = 0;
+
   function simulacion() {
+
+    datosGenerales = [];
+    eventosEncontrados = [];
+    productoSeleccionado = [];
+
     let iteraciones = $("#numOrdenes").val();
+
     for (let i = 0; i < iteraciones; i++) {
-      // console.log('i: ', i);
+      let productoElegidoObj = null;
+      productosServicio.forEach((key, index) => {
+        const aleatorio = Math.round(Math.random() * 100, 2);
+
+        console.log("aleatorio: ", aleatorio);
+        if (key["desde"] >= aleatorio && aleatorio <= key["hasta"]) {
+          productoElegidoObj = key;
+          return;
+        }
+      });
+
+      productoSeleccionado.push({
+        idProducto: productoElegidoObj["idProducto"],
+        producto: productoElegidoObj["producto"],
+        tanda: productoElegidoObj["tanda"],
+        probabilidad: productoElegidoObj["idProducto"],
+        lambda: lambda,
+        mew: mew,
+        fecha: fecha.setHours(
+          fecha.getHours() + parseInt($("#numPromedioDuracion").val())
+        ),
+      });
+
+      fasesServicio.forEach((fase, indexFase) => {
+        lambda = fase["llegada"];
+
+        EventosServicio.forEach((evento, indexEvento) => {
+          if (fase["fase"] == evento["fase"]) {
+            // console.log(fase["fase"]);
+            // console.log("evento: ", evento);
+            // const aleatorio = binomial(aleatorio);
+            const aleatorio = Math.round(parseFloat(Math.random() * 100), 2);
+
+            if (evento["desde"] >= aleatorio && aleatorio <= evento["hasta"]) {
+              console.log("cumplio: ", aleatorio);
+
+              eventosEncontrados.push({
+                numOrden: i,
+                fase: evento["fase"],
+                accionCorrectiva: evento["accionCorrectiva"],
+                t_servicio: evento["t_servicio"],
+                fase: evento["fase"],
+                fecha: fecha.setHours(
+                  fecha.getHours() + parseInt($("#numPromedioDuracion").val())
+                ),
+              });
+              tiempoTotalServicio +=
+                parseFloat(tiempoTotalServicio) *
+                parseFloat(evento["t_servicio"]);
+            }
+          }
+        });
+      });
+
+      console.log("productoElegidoObj: ", productoElegidoObj);
+      lambda =
+        parseFloat($("#numOrdenes").val() * 24) /
+        parseFloat(tiempoTotalServicio);
+      mew = parseFloat($("#numPromedioDuracion").val()) / 8;
+
+      console.log("mew: ", mew);
+      console.log("lambda: ", lambda);
+      console.log("tiempoTotalServicio: ", tiempoTotalServicio / 60);
+
+      datosGenerales.push({
+        mew: mew,
+        lambda: lambda,
+        producto: productoElegidoObj,
+      });
     }
+
+    console.log("DatosGenerales: ",datosGenerales);
+    console.log("eventosEncontrados: ",eventosEncontrados);
+    console.log("productoSeleccionado: ",productoSeleccionado);
+
   }
 
   $("#formProcesar").validate({
@@ -66,11 +226,10 @@ $(function () {
        */
       $.post(
         "ajax/SimulacionAjax.php",
-        { exec: "getEventos"},
+        { exec: "getEventos" },
         function (data) {
           EventosServicio = [];
           data.forEach((key, index) => {
-
             if (index == 0) {
               desde = 0;
               hasta = parseFloat(key["probabilidad"]);
@@ -100,10 +259,9 @@ $(function () {
         "json"
       );
 
-      console.log('EventosServicio:', EventosServicio);
-      if(EventosServicio.length > 0) {
+      // console.log('EventosServicio:', EventosServicio);
+      if (EventosServicio.length > 0) {
         generarTablaEventos(EventosServicio);
-
       }
       /**
        * CONSULTAR LA INFORMACION DE LAS TANDAS
@@ -121,6 +279,7 @@ $(function () {
 
           data.forEach((key, index) => {
             probabilidadSum += parseFloat(key["llegada"]);
+            tiempoTotalServicio += parseFloat(key["llegada"]);
 
             // console.log(probabilidadSum);
             let grafico = {
@@ -163,7 +322,7 @@ $(function () {
         );
       }
 
-      console.log("fasesServicio: ", fasesServicio);
+      // console.log("fasesServicio: ", fasesServicio);
       let desde = 0;
       let hasta = 0;
 
@@ -180,7 +339,6 @@ $(function () {
               label: key["producto"],
               data: parseFloat(key["probabilidad"]),
             };
-
             if (index == 0) {
               desde = 0;
               hasta = parseFloat(key["probabilidad"]);
@@ -206,6 +364,7 @@ $(function () {
         "json"
       );
 
+      console.log("productosServicio: ", productosServicio);
       if (productosGrafico.length > 0) {
         crearGrafico("producto", productosGrafico);
       }
@@ -239,7 +398,7 @@ $(function () {
       probabilidad += parseFloat(key["probabilidad"]);
       html += `
                   <tr>
-                  <td><strong>${index+1}</strong></td>
+                  <td><strong>${index + 1}</strong></td>
                   <td><strong>${key["fase"]}</strong></td>
                   <td><strong>${key["probabilidad"]} %</strong></td>
                   <td><strong>${key["llegada"]}</strong></td>
@@ -251,7 +410,7 @@ $(function () {
 
     html += `<tr style="background-color:#6F747E; color:#FFFF">
               <th colspan="3">Tiempo total del servicio</th>
-              <th colspan="3">${Math.round((tiempoServicio/60),2)} Horas</th>
+              <th colspan="3">${Math.round(tiempoServicio / 60, 2)} Horas</th>
             </tr>`;
 
     $("#tablaFases").empty();
@@ -261,8 +420,6 @@ $(function () {
   }
 
   function generarTablaEventos(arreglo) {
-    
-
     let html = `
               <thead style="background-color:#6F747E; color:#FFFF">
                 <tr>
@@ -286,12 +443,15 @@ $(function () {
       probabilidad += parseFloat(key["probabilidad"]);
       html += `
                   <tr>
-                  <td><strong>${index+1}</strong></td>
+                  <td><strong>${index + 1}</strong></td>
                   <td><strong>${key["evento"]}</strong></td>
                   <td><strong>${key["probabilidad"]} %</strong></td>
                   <td><strong>${key["fase"]}</strong></td>
                   <td><strong>${key["distribucion"]}</strong></td>
-                  <td><strong>${Math.round(key["desde"],2)} - ${Math.round(key["hasta"],2)}</strong></td>
+                  <td><strong>${Math.round(key["desde"], 2)} - ${Math.round(
+        key["hasta"],
+        2
+      )}</strong></td>
                   <td><strong>${key["accionCorrectiva"]}</strong></td>
                   <td><strong>${key["t_servicio"]}%</strong></td>
 
@@ -301,7 +461,7 @@ $(function () {
 
     $("#tablaEventos").empty();
     $("#tablaEventos").html(html);
-    console.log(html);
+    // console.log(html);
   }
   function crearGrafico(clase, data) {
     $.plot(`#donut-chart-${clase}`, data, {

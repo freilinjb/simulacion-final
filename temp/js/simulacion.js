@@ -12,11 +12,11 @@ function NumComb(sup, inf) {
 }
 
 function Binomial(n, p, k) {
-  miForm = document.forms[0];
+  // miForm = document.forms[0];
   n = parseInt(n);
   k = parseInt(k);
-  miForm.pruebas.value = n;
-  miForm.exitos.value = k;
+  // miForm.pruebas.value = n;
+  // miForm.exitos.value = k;
   var vResp;
 
   if (n > 0 && p >= 0 && p <= 1 && k >= 0 && k <= n) {
@@ -24,19 +24,19 @@ function Binomial(n, p, k) {
     if (isNaN(vResp) == true) {
       vResp = " � E R R O R ! ";
     }
-    miForm.respuesta.value = vResp;
   } else {
     vResp = " � E R R O R ! ";
-    miForm.respuesta.value = vResp;
   }
+
+  return vResp;
 }
 //--------------------------------------------
 function BinomialAcu(n, p, k) {
-  miForm = document.forms[1];
+  // miForm = document.forms[1];
   n = parseInt(n);
   k = parseInt(k);
-  miForm.pruebas.value = n;
-  miForm.exitos.value = k;
+  // miForm.pruebas.value = n;
+  // miForm.exitos.value = k;
   var vResp = 0;
   var i = 0;
 
@@ -48,10 +48,10 @@ function BinomialAcu(n, p, k) {
     if (isNaN(vResp) == true) {
       vResp = " � E R R O R ! ";
     }
-    miForm.respuesta.value = vResp;
+    // miForm.respuesta.value = vResp;
   } else {
     vResp = " � E R R O R ! ";
-    miForm.respuesta.value = vResp;
+    // miForm.respuesta.value = vResp;
   }
 }
 
@@ -67,16 +67,13 @@ class Simulacion {
     return this.tiempoLlegada;
   }
 }
+
+console.log(Binomial(100,4,6));
 const fecha1 = new Date('2014-03-09 04:59:00');
 const fecha2 = new Date();
 console.log(fecha1.getHours());
 console.log(fecha2.getHours());
-console.log(BinomialAcu(5,4,5));
+console.log(Binomial(7,0.25,3));
 
 const prueba = new Simulacion("Hola mundo", "Hola llego");
 console.log(prueba.hablar());
-
-
-fases.forEach(element => {
-  
-});
