@@ -54,9 +54,9 @@
 
                                     $estado = null;
                                     if ($value["estado"] == "activo") {
-                                        $estado = "<span class='badge badge-success'>" . $value["estado"] . "</span>";
+                                        $estado = "<span class='badge badge-success'>" . strtoupper($value["estado"]) . "</span>";
                                     } else {
-                                        $estado = "<span class='badge badge-danger'>" . $value["estado"] . "</span>";
+                                        $estado = "<span class='badge badge-danger'>" . strtoupper($value["estado"]) . "</span>";
                                     }
 
                                     echo '<tr>
@@ -65,7 +65,7 @@
                                     <td>' . strtoupper($value["fase"]) . '</td>
                                     <td>' . strtoupper($value["distribucion"]) . '</td>
                                     <td>' . strtoupper($value["tipo"]) . '</td>
-                                    <td>' . strtoupper($estado) . '</td>
+                                    <td>' . $estado . '</td>
                                     <td>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-primary btnEditarEvento" data-toggle="modal" data-target="#modalEditarEvento" idEvento="' . $value["idEvento"] . '"><i class="fas fa-eye"></i></button>

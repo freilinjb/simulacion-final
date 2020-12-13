@@ -27,7 +27,6 @@
                             Datos generales
                         </h3>
                     </div>
-
                     <div class="row">
                         <div class="col-6">
                         <div class="card-body">
