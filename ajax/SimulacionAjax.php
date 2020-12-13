@@ -63,10 +63,16 @@ class SimulacionAjax {
 
     public function getTandaTiempoServicio()
     {
-
         $item = "idTanda";
         $valor = $this->idTanda;
         $respusta = SimulacionModel::getData("tandatiemposervicio_v",$item, $valor);
+        // print_r($respusta);die;
+        echo json_encode($respusta);
+    }
+
+    public function getEventos()
+    {
+        $respusta = SimulacionModel::getData("evento_v",null, null);
         // print_r($respusta);die;
         echo json_encode($respusta);
     }
@@ -105,6 +111,10 @@ if(isset($_POST['exec']) && !empty($_POST['exec'])) {
         case 'getTiempoServicio':
             $ejecutar->idTanda = $_POST["idTanda"];
             $ejecutar -> getTiempoServicio();
+            break;
+        
+        case 'getEventos':
+            $ejecutar -> getEventos();
             break;
     }
 }

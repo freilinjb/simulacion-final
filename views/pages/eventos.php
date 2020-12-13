@@ -39,6 +39,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Evento</th>
+                                    <th>Probabilidad</th>
                                     <th>Fase</th>
                                     <th>Distribucion</th>
                                     <th>Tipo de distribucion</th>
@@ -60,12 +61,13 @@
                                     }
 
                                     echo '<tr>
-                                    <td>' . ($key + 1) . '</td>
-                                    <td>' . strtoupper($value["evento"]) . '</td>
-                                    <td>' . strtoupper($value["fase"]) . '</td>
-                                    <td>' . strtoupper($value["distribucion"]) . '</td>
-                                    <td>' . strtoupper($value["tipo"]) . '</td>
-                                    <td>' . $estado . '</td>
+                                    <td><strong>' . ($key + 1) . '<strong></td>
+                                    <td><strong>' . strtoupper($value["evento"]) . '</strong></td>
+                                    <td><strong>' . strtoupper($value["probabilidad"]) . ' %</strong></td>
+                                    <td><strong>' . strtoupper($value["fase"]) . '</strong></td>
+                                    <td><strong>' . strtoupper($value["distribucion"]) . '</strong></td>
+                                    <td><strong>' . strtoupper($value["tipo"]) . '</strong></td>
+                                    <td><strong>' . $estado . '<strong></td>
                                     <td>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-primary btnEditarEvento" data-toggle="modal" data-target="#modalEditarEvento" idEvento="' . $value["idEvento"] . '"><i class="fas fa-eye"></i></button>

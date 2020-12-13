@@ -52,7 +52,8 @@
                                 <label>Tiempo objetivo de respuesta (horas)</label>
                                 <input type="number" class="form-control" name="tiempoObjetivo" id="tiempoObjetivo" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="3">
                             </div>
-                            <button type="submit" class="btn btn-primary float-right" id="btnProcesar">Procesar</button>
+                            <button type="submit" class="btn btn-primary float-right ml-2" id="btnConsultar">Consultar</button>
+                            <button type="button" class="btn btn-primary float-right" id="btnProcesar">Procesar</button>
                         </form>
                     </div>
                 </div>
@@ -68,10 +69,10 @@
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Fases</a>
+                                <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Datos generales </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Profile</a>
+                                <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Informacion a procesar</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-content-above-messages-tab" data-toggle="pill" href="#custom-content-above-messages" role="tab" aria-controls="custom-content-above-messages" aria-selected="false">Messages</a>
@@ -86,29 +87,39 @@
                         <div class="tab-content" id="custom-content-above-tabContent">
                             <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
                                 <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-6">
-                                        <!-- GRAFICO -->
-                                        <h4>Fases del sistema de produccion</h4>
-                                        <div id="donut-chart" style="height: 300px;"></div>
-                                        <hr>
-                                        <p>Tiempo del servicio: <span id="faseTiempo"></span></p>
-                                        <!-- GRAFICO -->
+                                    <div class="row justify-content-center">
+                                        <div class="col-6">
+                                            <!-- GRAFICO -->
+                                            <p class="lead mb-0">Fases del sistema de produccion</p>
+                                            <div id="donut-chart-fase" style="height: 300px;"></div>
+                                            <hr>
+                                            <p>Tiempo total del servicio servicio: <span id="faseTiempo"></span></p>
+                                            <!-- GRAFICO -->
+                                        </div>
+                                        <div class="col-6">
+                                            <!-- GRAFICO -->
+                                            <p class="lead mb-0">Productos disponible y porcentaje utilizacion</p>
+                                            <div id="donut-chart-producto" style="height: 300px;"></div>
+                                            <hr>
+                                            <!-- GRAFICO -->
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <!-- GRAFICO -->
-                                        <h4>Productos del sistema</h4>
-                                        <div id="donut" style="height: 300px;"></div>
-                                        <hr>
-                                        <p>Tiempo del servicio: <span id="faseTiempo"></span></p>
-                                        <!-- GRAFICO -->
                                 </div>
-                                </div>
-                            </div>
 
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
-                                Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-bordered table-striped table-hover" id="tablaFases">
+
+                                        </table>
+                                    </div>
+                                    <div class="col-12">
+                                        <table class="table table-bordered table-striped table-hover" id="tablaEventos">
+
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-messages" role="tabpanel" aria-labelledby="custom-content-above-messages-tab">
                                 Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
@@ -175,28 +186,27 @@
 
 <script>
     $(function() {
-                //     $("#empleados").DataTable({
-                //         "responsive": true,
-                //         "lengthChange": false,
-                //         "autoWidth": false,
-                //         "info": true,
-                //         "paging": true,
-                //         "pageLength": 7,
-                //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(0)');
+        // $("#tablaEventos").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         "info": true,
+        //         "paging": true,
+        //         "pageLength": 7,
+        //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
 
-                //     $("#faseTiempo").DataTable({
-                //         "responsive": true,
-                //         "lengthChange": false,
-                //         "autoWidth": false,
-                //         "info": true,
-                //         "paging": true,
-                //         "pageLength": 7,
-                //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
+        //     $("#tablaEventos").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         "info": true,
+        //         "paging": true,
+        //         "pageLength": 7,
+        //     }).buttons().container().appendTo('#empleados_wrapper  .col-md-6:eq(7)');
 
-                //Initialize Select2 Elements
-                $('.select2bs4').select2({
-                    theme: 'bootstrap4'
-                });
-            });
-
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        });
+    });
 </script>
