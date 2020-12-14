@@ -147,6 +147,7 @@ $(function () {
               eventosEncontrados.push({
                 numOrden: i,
                 fase: evento["fase"],
+                evento: evento["evento"],
                 accionCorrectiva: evento["accionCorrectiva"],
                 t_servicio: evento["t_servicio"],
                 fase: evento["fase"],
@@ -481,12 +482,13 @@ $(function () {
     let html = `
               <thead style="background-color:#6F747E; color:#FFFF">
                 <tr>
-                  <th colspan="5"><h3 class="text-center">INFORMACION FINAL DE LOS EVENTOS REGISTRADOS Y SUS CORRECCIONES</h3></th>
+                  <th colspan="6"><h3 class="text-center">INFORMACION FINAL DE LOS EVENTOS REGISTRADOS Y SUS CORRECCIONES</h3></th>
                 </tr>
 
                 <tr>
                   <th>numOrden</th>
                   <th>Fase</th>
+                  <th>Evento</th>
                   <th>fecha</th>
                   <th>Inc. servicio</th>
                   <th>Accion Correctiva</th>
@@ -498,8 +500,9 @@ $(function () {
       html += `
                 <tr>
                   <td><strong>${key["numOrden"]}</strong></td>
-                  <td><strong>${key["fase"].toLocaleString()}</strong></td>
-                  <td><strong>${fecha}</strong></td>
+                  <td><strong>${key["fase"]}</strong></td>
+                  <td class="bg-danger"><strong>${key["evento"]}</strong></td>
+                  <td><strong>${fecha.toLocaleString()}</strong></td>
                   <td><strong>${key["t_servicio"]}%</strong></td>
                   <td><strong>${key["accionCorrectiva"]}</strong></td>
                 </tr>

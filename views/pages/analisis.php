@@ -45,11 +45,11 @@
                                 <input type="number" class="form-control" name="numOrdenes" id="numOrdenes" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="30">
                             </div>
                             <div class="form-group">
-                                <label>Promedio de duración de las ordenes (horas)</label>
+                                <label>Promedio de duración del proceso de produccion (horas)</label>
                                 <input type="number" class="form-control" name="numPromedioDuracion" id="numPromedioDuracion" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="5">
                             </div>
                             <div class="form-group">
-                                <label>Tiempo objetivo de respuesta (horas)</label>
+                                <label>Tiempo objetivo de cumplimiento (horas)</label>
                                 <input type="number" class="form-control" name="tiempoObjetivo" id="tiempoObjetivo" placeholder="Ingrese los numeros de ordenes entrantes" min="0" autocomplete="off" value="3">
                             </div>
                             <button type="submit" class="btn btn-primary float-right ml-2" id="btnConsultar">Consultar</button>
@@ -141,11 +141,11 @@
                                     <a href="#" class="list-group-item list-group-item-action active">
                                         CONCLUSION
                                     </a>
-                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya ordenes en espera. <span id="conclusion1"></span></a>
-                                    <a href="#" class="list-group-item list-group-item-action">Longitud media de la linea de produccion. <span id="conclusion2"></span></a>
-                                    <a href="#" class="list-group-item list-group-item-action">Tiempo medio de espera de la linea de produccion. <span id="conclusion3"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya órdenes  en espera. <span id="conclusion1"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Longitud media de la línea de producción. <span id="conclusion2"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Tiempo medio de espera de la linea de producción. <span id="conclusion3"></span></a>
                                     <a href="#" class="list-group-item list-group-item-action">Probabilidad de que el cliente pueda ser atendido inmediatamente. <span id="conclusion4"></span></a>
-                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya por lo menos dos ordenes en cola. <span id="conclusion5"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya por lo menos dos órdenes  en cola. <span id="conclusion5"></span></a>
                                     </div>
                                 </div>
                             </div>
