@@ -136,7 +136,18 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="custom-content-above-settings" role="tabpanel" aria-labelledby="custom-content-above-settings-tab">
-                                Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+                            <div id="conclusion">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action active">
+                                        CONCLUSION
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya ordenes en espera. <span id="conclusion1"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Longitud media de la linea de produccion. <span id="conclusion2"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Tiempo medio de espera de la linea de produccion. <span id="conclusion3"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que el cliente pueda ser atendido inmediatamente. <span id="conclusion4"></span></a>
+                                    <a href="#" class="list-group-item list-group-item-action">Probabilidad de que haya por lo menos dos ordenes en cola. <span id="conclusion5"></span></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

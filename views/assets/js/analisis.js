@@ -96,6 +96,9 @@ $(function () {
   let lambda = 0;
   let mew = 0;
 
+  let lambdaSum = 0;
+  let mewSum = 0;
+
   function simulacion() {
 
     datosGenerales = [];
@@ -169,6 +172,11 @@ $(function () {
       console.log("lambda: ", lambda);
       console.log("tiempoTotalServicio: ", tiempoTotalServicio / 60);
 
+      //SUMATORIA TOTAL DE LAS VARIABLES;
+      lambdaSum += lambda;
+      mewSum += mew;
+
+
       datosGenerales.push({
         mew: mew,
         lambda: lambda,
@@ -176,10 +184,12 @@ $(function () {
       });
     }
 
-    console.log("DatosGenerales: ",datosGenerales);
+    console.log("lambdaSum: ",lambdaSum);
     // console.log("eventosEncontrados: ",eventosEncontrados);
-    console.log("productoSeleccionado: ",productoSeleccionado);
+    console.log("mewSum: ",mewSum);
 
+
+    generarConclusion(lambdaSum, mewSum);
     generarTablaProcesamientoEventos(eventosEncontrados);
     generarTablaProcesamientoProductos(productoSeleccionado);
 
@@ -565,5 +575,21 @@ $(function () {
         show: false,
       },
     });
+  }
+
+  function generarConclusion(lambda, mew) {
+    conclusion1 = 1-(lambda/mew);
+    conclusion2 = Math.pow(lambda,2)/( mew * (mew - lambda));
+    conclusion3 = lambda/(mew * (mew - lambda));
+    conclusion4 = (lambda/mew);
+    conclusion5 = 1 - (lambda/mew);
+    conclusion5n = conclusion5*conclusion4;
+    conclusion5n1 = conclusion5n*conclusion3;
+    conclusion5n2 = 1 - conclusion5n1;
+    $("#conclusion1").html(`<strong>${Math.round(conclusion1 * 100)}%</strong>`);
+    $("#conclusion2").html(`<strong>${Math.round(conclusion2 * 100)}%</strong>`);
+    $("#conclusion3").html(`<strong>${Math.round(conclusion3 )} horas </strong>`);
+    $("#conclusion4").html(`<strong>${Math.round(conclusion4 * 100)}  </strong>`);
+    $("#conclusion5").html(`<strong>${Math.round(conclusion5n2 * 100)}  </strong>`);
   }
 });
