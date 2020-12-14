@@ -80,6 +80,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-content-above-settings-tab" data-toggle="pill" href="#custom-content-above-settings" role="tab" aria-controls="custom-content-above-settings" aria-selected="false">Conclusion</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-content-recomendacion-settings-tab" data-toggle="pill" href="#custom-content-recomendacion-settings" role="tab" aria-controls="custom-content-recomendacion-settings" aria-selected="false">Recomendacion</a>
+                            </li>
                         </ul>
                         <div class="tab-custom-content">
                             <p class="lead mb-0">Calidad del servicio</p>
@@ -149,6 +152,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="custom-content-recomendacion-settings" role="tabpanel" aria-labelledby="custom-content-recomendacion-settings-tab">
+                                <div id="recomendacion">
+                                    <p>Se recomiendoa realizar una mayor supervision de las operaciones para mitigar mas los errores humanos que se den</p>
+                                    <p>Se recomiendoa realizar implementar una nueva linea de produccion para satisfacer la demanda del mercado</p>
+                                </div> 
+                            </div>      
                         </div>
                     </div>
                     <!-- /.card -->

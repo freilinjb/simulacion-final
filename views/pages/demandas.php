@@ -1,6 +1,4 @@
-<?php 
-    print_r($_GET);
-?>
+
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
